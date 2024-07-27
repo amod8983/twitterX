@@ -3,10 +3,17 @@ import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/core/widgets/buttons/social_signin_button.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 import 'package:twitterx/core/widgets/divider_with_text.dart';
+import 'package:twitterx/features/auth/presentation/screens/signup.dart';
 import 'package:twitterx/features/auth/presentation/widgets/term_and_condition.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
+
+  void navigateToSignup(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const Signup()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,10 @@ class Welcome extends StatelessWidget {
                     width: double.infinity,
                     child: TwitterElevatedButton(
                       buttonText: 'Create account',
-                      onTap: () {},
+                      disabled: false,
+                      onTap: () {
+                        navigateToSignup(context);
+                      },
                     )),
                 const SizedBox(
                   height: 28,

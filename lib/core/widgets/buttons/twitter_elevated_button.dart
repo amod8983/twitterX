@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 class TwitterElevatedButton extends StatelessWidget {
   final String buttonText;
   final void Function() onTap;
-  const TwitterElevatedButton(
-      {super.key, required this.buttonText, required this.onTap});
+  final bool disabled;
+  const TwitterElevatedButton({
+    super.key,
+    required this.buttonText,
+    required this.onTap,
+    required this.disabled,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onTap,
+      onPressed: !disabled ? onTap : null,
       style: ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).textTheme.bodyMedium!.color,
         padding: const EdgeInsets.symmetric(

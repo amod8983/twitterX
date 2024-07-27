@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:twitterx/core/constants/constant.dart';
 
 const Color twitterBlue = Color(0xFF1DA1F2);
 
@@ -20,6 +21,12 @@ final ThemeData lightTheme = ThemeData(
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: twitterBlue,
   ),
+  inputDecorationTheme: const InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
+    ),
+    border: OutlineInputBorder(),
+  ),
 );
 
 // Dark Theme
@@ -38,5 +45,11 @@ final ThemeData darkTheme = ThemeData(
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: twitterBlue,
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
+    ),
+    border: OutlineInputBorder(),
   ),
 );
