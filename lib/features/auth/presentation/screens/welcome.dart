@@ -14,7 +14,7 @@ class Welcome extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           BlocProvider.of<ThemeBloc>(context).add(const ToogleThemeEvent(
-            isDarkMode: false));
+            isDarkMode: true));
         },
         child: const Icon(Icons.toggle_off_sharp),
       ),

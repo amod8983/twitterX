@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const Color twitterBlue = Color(0xFF1DA1F2);
 
@@ -12,9 +13,9 @@ final ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
   ),
   iconTheme: const IconThemeData(color: Colors.black),
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Colors.black),
-    bodySmall: TextStyle(color: Colors.black),
+  textTheme: GoogleFonts.robotoMonoTextTheme().copyWith(
+    bodyMedium: const TextStyle(color: Colors.black),
+    bodySmall: const TextStyle(color: Colors.black),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: twitterBlue,
@@ -31,9 +32,9 @@ final ThemeData darkTheme = ThemeData(
     titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
   ),
   iconTheme: const IconThemeData(color: Colors.white),
-  textTheme: const TextTheme(
-    bodyMedium: TextStyle(color: Colors.white),
-    bodySmall: TextStyle(color: Colors.white),
+  textTheme: GoogleFonts.robotoMonoTextTheme().copyWith(
+    bodyMedium: const TextStyle(color: Colors.white),
+    bodySmall: const TextStyle(color: Colors.white),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: twitterBlue,
