@@ -13,7 +13,7 @@ final ThemeData lightTheme = ThemeData(
     titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
   ),
   iconTheme: const IconThemeData(color: Colors.black),
-  textTheme: GoogleFonts.robotoMonoTextTheme().copyWith(
+  textTheme: GoogleFonts.openSansTextTheme().copyWith(
     bodyMedium: const TextStyle(color: Colors.black),
     bodySmall: const TextStyle(color: Colors.black),
   ),
@@ -32,7 +32,7 @@ final ThemeData darkTheme = ThemeData(
     titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
   ),
   iconTheme: const IconThemeData(color: Colors.white),
-  textTheme: GoogleFonts.robotoMonoTextTheme().copyWith(
+  textTheme: GoogleFonts.openSansTextTheme().copyWith(
     bodyMedium: const TextStyle(color: Colors.white),
     bodySmall: const TextStyle(color: Colors.white),
   ),

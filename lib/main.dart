@@ -13,6 +13,7 @@ import 'package:twitterx/core/injector/injection_container.dart' as di;
 
 // Feature - Auth
 import 'package:twitterx/features/auth/presentation/screens/welcome.dart';
+import 'package:twitterx/features/auth/business_logic/bloc/auth_bloc.dart';
 
 // Feature - Settings
 import 'package:twitterx/features/settings/business_logic/bloc/theme_bloc.dart';
@@ -39,13 +40,27 @@ class MyApp extends StatelessWidget {
       create: (_) => di.sl<ThemeBloc>(),
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'TwitterX',
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: themeState.themeMode,
-            home: const SplashScreen(),
+          return MultiBlocProvider(
+            providers: [BlocProvider(create: (_) => di.sl<AuthBloc>())],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'TwitterX',
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: themeState.themeMode,
+              home: StreamBuilder(
+                  stream: FirebaseAuth.instance.authStateChanges(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const SplashScreen();
+                    }
+                    if (snapshot.hasData) {
+                      return const Text('Welcome');
+                    } else {
+                      return const Welcome();
+                    }
+                  }),
+            ),
           );
         },
       ),
