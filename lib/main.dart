@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Core
 import 'package:twitterx/core/theme/theme.dart';
+import 'package:twitterx/core/widgets/splash_screen.dart';
 import 'package:twitterx/core/config/firebase_options.dart';
 import 'package:twitterx/core/injector/injection_container.dart' as di;
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: themeState.themeMode,
-            home: const Welcome(),
+            home: const SplashScreen(),
           );
         },
       ),
