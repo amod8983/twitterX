@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitterx/core/constants/constant.dart';
+import 'package:twitterx/core/widgets/buttons/social_signin_button.dart';
+import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 import 'package:twitterx/core/widgets/divider_with_text.dart';
 import 'package:twitterx/features/auth/presentation/widgets/term_and_condition.dart';
 
@@ -9,12 +11,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/logo/twitter.png',
-          width: 40,
-        ),
-      ),
+      appBar: kDefaultAppBar,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
         child: Column(
@@ -40,37 +37,12 @@ class Welcome extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 72,
-                    ),
-                    elevation: 2.0,
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(
-                        color: Color.fromARGB(181, 158, 158, 158), width: 1),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/logo/search.png',
-                        height: 24,
-                      ),
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        'Continue with Google',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                      )
-                    ],
+                SizedBox(
+                  width: double.infinity,
+                  child: SocialSigninButton(
+                    buttonText: 'Continue with Google',
+                    imageURL: 'assets/logo/search.png',
+                    onTap: () {},
                   ),
                 ),
                 const SizedBox(
@@ -81,28 +53,11 @@ class Welcome extends StatelessWidget {
                   height: 4,
                 ),
                 SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).textTheme.bodyMedium!.color,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 24,
-                      ),
-                      elevation: 2.0,
-                    ),
-                    child: Text(
-                      'Create account',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                          ),
-                    ),
-                  ),
-                ),
+                    width: double.infinity,
+                    child: TwitterElevatedButton(
+                      buttonText: 'Create account',
+                      onTap: () {},
+                    )),
                 const SizedBox(
                   height: 28,
                 ),
