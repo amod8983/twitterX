@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "600428116499",
+    "project_id": "twitterx-d8013",
+    "storage_bucket": "twitterx-d8013.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600428116499:android:3341f5d35dcb65b7d31de6",
+        "android_client_info": {
+          "package_name": "com.example.twitterx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600428116499-okrdokb70v06kd2h37ebcdm2ltokunl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC_Nt0SH2AwFiAlOaCiDSH0rQhld3eNqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600428116499-okrdokb70v06kd2h37ebcdm2ltokunl6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "600428116499-jsg38j2cci7eee8cr4ant64b958spbun.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.twitterx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
