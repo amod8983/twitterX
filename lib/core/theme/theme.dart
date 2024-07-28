@@ -30,7 +30,7 @@ final ThemeData lightTheme = ThemeData(
     ),
     border: OutlineInputBorder(),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey, width: 2.0),
+      borderSide: BorderSide(color: Colors.grey, width: 1.0),
     ),
   ),
 );
@@ -61,7 +61,7 @@ final ThemeData darkTheme = ThemeData(
     ),
     border: OutlineInputBorder(),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey, width: 2.0),
+      borderSide: BorderSide(color: Colors.grey, width: 1.0),
     ),
   ),
 );

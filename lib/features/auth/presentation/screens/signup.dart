@@ -87,7 +87,7 @@ class _SignupState extends State<Signup> {
                       ),
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
-                      autofocus: false,
+                      autofocus: true,
                       textCapitalization: TextCapitalization.none,
                       validator: (value) {
                         if (value == null ||

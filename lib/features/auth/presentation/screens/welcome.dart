@@ -3,6 +3,7 @@ import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/core/widgets/buttons/social_signin_button.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 import 'package:twitterx/core/widgets/divider_with_text.dart';
+import 'package:twitterx/features/auth/presentation/screens/login.dart';
 import 'package:twitterx/features/auth/presentation/screens/signup.dart';
 import 'package:twitterx/features/auth/presentation/widgets/term_and_condition.dart';
 
@@ -12,6 +13,12 @@ class Welcome extends StatelessWidget {
   void navigateToSignup(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const Signup()),
+    );
+  }
+
+  void navigateToLogin(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const Login()),
     );
   }
 
@@ -84,7 +91,9 @@ class Welcome extends StatelessWidget {
                           ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: (){
+                        navigateToLogin(context);
+                      },
                       child: Text(
                         'Log in',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
