@@ -7,6 +7,9 @@ const Color twitterBlue = Color(0xFF1DA1F2);
 // Light Theme
 final ThemeData lightTheme = ThemeData(
   primaryColor: twitterBlue,
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: twitterBlue,
+  ),
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: const AppBarTheme(
     color: Colors.white,
@@ -26,12 +29,18 @@ final ThemeData lightTheme = ThemeData(
       borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
     ),
     border: OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey, width: 2.0),
+    ),
   ),
 );
 
 // Dark Theme
 final ThemeData darkTheme = ThemeData(
   primaryColor: twitterBlue,
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    secondary: twitterBlue, 
+  ),
   scaffoldBackgroundColor: const Color(0xFF15202B),
   appBarTheme: const AppBarTheme(
     color: Color(0xFF15202B),
@@ -51,5 +60,8 @@ final ThemeData darkTheme = ThemeData(
       borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
     ),
     border: OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey, width: 2.0),
+    ),
   ),
 );

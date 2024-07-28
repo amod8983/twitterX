@@ -14,18 +14,12 @@ class _SignupState extends State<Signup> {
   final _emailKey = GlobalKey<FormFieldState>();
   final _passwordKey = GlobalKey<FormFieldState>();
 
-  // Used to change labelStyle on focus state
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
-  bool _isEmailFocused = false;
-  bool _isPasswordFocused = false;
-
   // Form data
   String _email = '';
   String _password = '';
   bool _isFormValid = false;
-  bool _isEmailValid = true;
-  bool _isPasswordValid = true;
+  bool _isEmailValid = false;
+  bool _isPasswordValid = false;
 
   void _validateForm() {
     if (_isEmailValid && _isPasswordValid) {
@@ -49,28 +43,6 @@ class _SignupState extends State<Signup> {
       _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
       _validateForm();
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _emailFocusNode.addListener(() {
-      setState(() {
-        _isEmailFocused = _emailFocusNode.hasFocus;
-      });
-    });
-    _passwordFocusNode.addListener(() {
-      setState(() {
-        _isPasswordFocused = _passwordFocusNode.hasFocus;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _emailFocusNode.dispose();
-    _passwordFocusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -106,19 +78,12 @@ class _SignupState extends State<Signup> {
                     TextFormField(
                       key: _emailKey,
                       onChanged: _verifyEmail,
-                      focusNode: _emailFocusNode,
                       cursorColor: kPrimaryColor,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 16,
                           ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email address',
-                        labelStyle: TextStyle(
-                          color: _isEmailFocused && _isEmailValid
-                              ? kPrimaryColor
-                              : null,
-                          fontWeight: FontWeight.w400,
-                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
@@ -142,19 +107,12 @@ class _SignupState extends State<Signup> {
                     TextFormField(
                       key: _passwordKey,
                       onChanged: _verifyPassword,
-                      focusNode: _passwordFocusNode,
                       cursorColor: kPrimaryColor,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 16,
                           ),
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(
-                          color: _isPasswordFocused && _isPasswordValid
-                              ? kPrimaryColor
-                              : null,
-                          fontWeight: FontWeight.w400,
-                        ),
                       ),
                       obscureText: true,
                       validator: (value) {
