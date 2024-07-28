@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App need photo permission to update your profile image</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App need camera permission to update your profile image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App need microphone permission to update your profile image</string>
 </dict>
 </plist>

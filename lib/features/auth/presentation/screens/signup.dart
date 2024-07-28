@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
+import 'package:twitterx/features/auth/presentation/widgets/user_details.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -43,6 +44,10 @@ class _SignupState extends State<Signup> {
       _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
       _validateForm();
     });
+  }
+
+  void _navigateToUserDetails(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const UserDetails()));
   }
 
   @override
@@ -143,7 +148,9 @@ class _SignupState extends State<Signup> {
                     child: TwitterElevatedButton(
                         buttonText: 'Next',
                         disabled: !_isFormValid,
-                        onTap: () {}),
+                        onTap: () {
+                          _navigateToUserDetails(context);
+                        },),
                   ),
                   const SizedBox(
                     height: 32,

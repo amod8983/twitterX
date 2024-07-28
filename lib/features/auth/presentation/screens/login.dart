@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                       height: 32,
                     ),
                     Text(
-                      'Login to your account',
+                      'Enter your email address and password to login into your account',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
