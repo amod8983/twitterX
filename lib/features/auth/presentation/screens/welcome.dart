@@ -30,6 +30,7 @@ class Welcome extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
             const SizedBox(
               height: 160,

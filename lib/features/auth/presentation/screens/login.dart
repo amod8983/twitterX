@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitterx/core/constants/constant.dart';
+import 'package:twitterx/core/utils/debouncer.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 
 class Login extends StatefulWidget {
@@ -10,7 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
- final _formKey = GlobalKey<FormState>();
+  final _debouncer = Debouncer(milliseconds: 500);
+
+  final _formKey = GlobalKey<FormState>();
   final _emailKey = GlobalKey<FormFieldState>();
   final _passwordKey = GlobalKey<FormFieldState>();
 
@@ -32,17 +35,27 @@ class _LoginState extends State<Login> {
   }
 
   void _verifyEmail(value) {
-    setState(() {
-      _isEmailValid = _emailKey.currentState?.validate() ?? false;
-      _validateForm();
+    _debouncer.run(() {
+      setState(() {
+        _isEmailValid = _emailKey.currentState?.validate() ?? false;
+        _validateForm();
+      });
     });
   }
 
   void _verifyPassword(value) {
-    setState(() {
-      _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
-      _validateForm();
+    _debouncer.run(() {
+      setState(() {
+        _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
+        _validateForm();
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _debouncer.dispose();
+    super.dispose();
   }
 
   @override

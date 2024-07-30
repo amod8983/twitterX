@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitterx/core/constants/constant.dart';
+import 'package:twitterx/core/utils/debouncer.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 import 'package:twitterx/features/auth/presentation/widgets/user_details.dart';
 
@@ -11,6 +12,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final _debouncer = Debouncer(milliseconds: 500);
+
   final _formKey = GlobalKey<FormState>();
   final _emailKey = GlobalKey<FormFieldState>();
   final _passwordKey = GlobalKey<FormFieldState>();
@@ -33,21 +36,32 @@ class _SignupState extends State<Signup> {
   }
 
   void _verifyEmail(value) {
-    setState(() {
-      _isEmailValid = _emailKey.currentState?.validate() ?? false;
-      _validateForm();
+    _debouncer.run(() {
+      setState(() {
+        _isEmailValid = _emailKey.currentState?.validate() ?? false;
+        _validateForm();
+      });
     });
   }
 
   void _verifyPassword(value) {
-    setState(() {
-      _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
-      _validateForm();
+    _debouncer.run(() {
+      setState(() {
+        _isPasswordValid = _passwordKey.currentState?.validate() ?? false;
+        _validateForm();
+      });
     });
   }
 
-  void _navigateToUserDetails(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const UserDetails()));
+  void _navigateToUserDetails(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const UserDetails()));
+  }
+
+  @override
+  void dispose() {
+    _debouncer.dispose();
+    super.dispose();
   }
 
   @override
@@ -146,11 +160,12 @@ class _SignupState extends State<Signup> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: TwitterElevatedButton(
-                        buttonText: 'Next',
-                        disabled: !_isFormValid,
-                        onTap: () {
-                          _navigateToUserDetails(context);
-                        },),
+                      buttonText: 'Next',
+                      disabled: !_isFormValid,
+                      onTap: () {
+                        _navigateToUserDetails(context);
+                      },
+                    ),
                   ),
                   const SizedBox(
                     height: 32,
