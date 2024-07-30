@@ -54,8 +54,14 @@ class _SignupState extends State<Signup> {
   }
 
   void _navigateToUserDetails(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => const UserDetails()));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => UserDetails(
+          email: _email,
+          password: _password,
+        ),
+      ),
+    );
   }
 
   @override

@@ -13,7 +13,9 @@ final formatter = DateFormat('dd-MMMM-yyyy');
 enum Gender { male, female, other }
 
 class UserDetails extends StatefulWidget {
-  const UserDetails({super.key});
+  final String email;
+  final String password;
+  const UserDetails({super.key, required this.email, required this.password});
 
   @override
   State<UserDetails> createState() => _UserDetailsState();
