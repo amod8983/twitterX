@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:twitterx/features/settings/business_logic/bloc/theme_bloc.dart';
 
 // Feature - auth
-import 'package:twitterx/features/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
 
 final sl = GetIt.instance;
 

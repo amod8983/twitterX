@@ -13,7 +13,7 @@ import 'package:twitterx/core/injector/injection_container.dart' as di;
 
 // Feature - Auth
 import 'package:twitterx/features/auth/presentation/screens/welcome.dart';
-import 'package:twitterx/features/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
 
 // Feature - Settings
 import 'package:twitterx/features/settings/business_logic/bloc/theme_bloc.dart';
