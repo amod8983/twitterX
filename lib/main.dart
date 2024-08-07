@@ -11,6 +11,7 @@ import 'package:twitterx/core/widgets/splash_screen.dart';
 import 'package:twitterx/core/config/firebase_options.dart';
 import 'package:twitterx/core/injector/injection_container.dart' as di;
 import 'package:twitterx/core/injector/bloc_observer.dart';
+import 'package:twitterx/features/auth/business_logic/user/user_bloc.dart';
 
 // Feature - Auth
 import 'package:twitterx/features/auth/presentation/screens/welcome.dart';
@@ -44,7 +45,10 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
           return MultiBlocProvider(
-            providers: [BlocProvider(create: (_) => di.sl<AuthBloc>())],
+            providers: [
+              BlocProvider(create: (_) => di.sl<AuthBloc>()),
+              BlocProvider(create: (_) => di.sl<UserBloc>()),
+            ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'TwitterX',

@@ -66,7 +66,6 @@ class UserDetails extends Equatable {
       'gender': gender,
       'dob': dob,
       'profilePhotoUrl': profilePhotoUrl,
-      'profilePhoto': profilePhoto,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
     };
@@ -103,7 +102,6 @@ class UserDetails extends Equatable {
     String? gender,
     String? dob,
     String? profilePhotoUrl,
-    File? profilePhoto,
     String? createdAt,
     String? updatedAt,
   }) {
@@ -116,7 +114,6 @@ class UserDetails extends Equatable {
       gender: gender ?? this.gender,
       dob: dob ?? this.dob,
       profilePhotoUrl: profilePhotoUrl ?? this.profilePhotoUrl,
-      profilePhoto: profilePhoto ?? this.profilePhoto,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
