@@ -10,6 +10,7 @@ import 'package:twitterx/core/theme/theme.dart';
 import 'package:twitterx/core/widgets/splash_screen.dart';
 import 'package:twitterx/core/config/firebase_options.dart';
 import 'package:twitterx/core/injector/injection_container.dart' as di;
+import 'package:twitterx/core/injector/bloc_observer.dart';
 
 // Feature - Auth
 import 'package:twitterx/features/auth/presentation/screens/welcome.dart';
@@ -20,6 +21,8 @@ import 'package:twitterx/features/settings/business_logic/bloc/theme_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize bloc observer to log state update
+  Bloc.observer = const TwitterXBlocObserver();
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Initialize Service locator
