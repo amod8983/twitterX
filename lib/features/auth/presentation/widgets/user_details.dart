@@ -1,11 +1,13 @@
 // Flutter package
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // dependency
 import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
+import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
 import 'package:twitterx/features/auth/presentation/widgets/user_image_picker.dart';
 
 final formatter = DateFormat('dd-MMMM-yyyy');
@@ -63,6 +65,12 @@ class _UserDetailsState extends State<UserDetails> {
       _name = _nameController.text;
       _dob = _dobController.text;
       // Continue with signup
+      context.read<AuthBloc>().add(
+            AuthSignupRequested(
+              email: widget.email,
+              password: widget.password,
+            ),
+          );
     }
   }
 

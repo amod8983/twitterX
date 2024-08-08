@@ -6,7 +6,7 @@ class AuthDataProvider {
   AuthDataProvider({FirebaseAuth? firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
-  Future<UserCredential> signUp(String email, String password) {
+  Future<UserCredential> signup(String email, String password) {
     return _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,

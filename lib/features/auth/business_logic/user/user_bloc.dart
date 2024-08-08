@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:twitterx/features/auth/data/models/file_model.dart';
 import 'package:twitterx/features/auth/data/models/user_details.dart';
 
 part 'user_event.dart';

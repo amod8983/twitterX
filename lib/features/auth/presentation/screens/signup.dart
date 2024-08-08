@@ -54,6 +54,7 @@ class _SignupState extends State<Signup> {
   }
 
   void _navigateToUserDetails(BuildContext context) {
+    _formKey.currentState?.save();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => UserDetails(

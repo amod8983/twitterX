@@ -9,7 +9,8 @@ sealed class UserEvent extends Equatable {
 
 class UserCreate extends UserEvent {
   final UserDetails userdetails;
-  const UserCreate({required this.userdetails});
+  final FileModel? userPhoto;
+  const UserCreate({required this.userdetails, this.userPhoto});
 
   @override
   List<Object> get props => [userdetails];
@@ -17,7 +18,8 @@ class UserCreate extends UserEvent {
 
 class UserUpdate extends UserEvent {
   final UserDetails userdetails;
-  const UserUpdate({required this.userdetails});
+  final FileModel? userPhoto;
+  const UserUpdate({required this.userdetails, this.userPhoto});
 
   @override
   List<Object> get props => [userdetails];

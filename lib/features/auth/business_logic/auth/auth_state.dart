@@ -22,15 +22,17 @@ final class AuthProcessing extends AuthState {
 }
 
 final class AuthSuccess extends AuthState {
-  final UserDetails currentUserDetails;
+  final UserCredential userCredential;
 
   const AuthSuccess({
-    required this.currentUserDetails,
+    required this.userCredential,
   });
 
   @override
-  List<Object?> get props => [currentUserDetails];
+  List<Object?> get props => [userCredential];
 }
+
+final class AuthLogoutSuccess extends AuthState {}
 
 final class AuthError extends AuthState {
   final String error;
