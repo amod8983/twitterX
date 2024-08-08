@@ -13,7 +13,6 @@ class UserDetails extends Equatable {
   final String gender;
   final String dob;
   final String? profilePhotoUrl;
-  final File? profilePhoto;
   final String? createdAt;
   final String? updatedAt;
 
@@ -26,7 +25,6 @@ class UserDetails extends Equatable {
     required this.gender,
     required this.dob,
     this.profilePhotoUrl,
-    this.profilePhoto,
     this.createdAt,
     this.updatedAt,
   });
@@ -38,11 +36,10 @@ class UserDetails extends Equatable {
     required this.name,
     required this.gender,
     required this.dob,
-    required this.profilePhoto,
-  }): id = null,
-      profilePhotoUrl = null,
-      createdAt = DateTime.now().toString(),
-      updatedAt = DateTime.now().toString();
+  })  : id = null,
+        profilePhotoUrl = null,
+        createdAt = DateTime.now().toString(),
+        updatedAt = DateTime.now().toString();
 
   @override
   List<Object?> get props => [

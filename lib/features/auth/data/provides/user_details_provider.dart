@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:twitterx/features/auth/data/models/file_model.dart';
 import 'package:twitterx/features/auth/data/models/user_details.dart';
 import 'package:twitterx/features/auth/data/provides/file_provider.dart';
 
@@ -8,14 +10,13 @@ class UserDetailsProvider {
       : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
   Future<DocumentReference<Map<String, dynamic>>> createUser(
-    UserDetails userDetails,
-  ) async {
+      UserDetails userDetails, FileModel? profilePhoto) async {
     String profilePhotoUrl = '';
 
     // If the user data contains profile photo, then first upload the photo
-    if (userDetails.profilePhoto != null) {
+    if (profilePhoto != null) {
       profilePhotoUrl = await FileProvider()
-          .uploadProfilePhoto(userDetails.profilePhoto!, userDetails.userId);
+          .uploadProfilePhoto(profilePhoto.file, userDetails.userId);
     }
 
     // Add a new entry in user collection.
