@@ -339,10 +339,19 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
                               text: state.message,
                             );
                           }
-                          return TwitterElevatedButton(
-                              buttonText: 'Create account',
-                              disabled: false,
-                              onTap: _submitUserData);
+                          return BlocBuilder<UserBloc, UserState>(
+                            builder: (ctx, userState) {
+                              if (userState is UserLoading) {
+                                return const CircularLoadingWithText(
+                                  text: 'Adding user details',
+                                );
+                              }
+                              return TwitterElevatedButton(
+                                  buttonText: 'Create account',
+                                  disabled: false,
+                                  onTap: _submitUserData);
+                            },
+                          );
                         },
                       ),
                     ),
