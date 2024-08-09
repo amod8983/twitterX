@@ -9,8 +9,10 @@ class UserDetailsProvider {
   UserDetailsProvider({FirebaseFirestore? firebaseFirestore})
       : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
 
-  Future<DocumentReference<Map<String, dynamic>>> createUser(
-      UserDetails userDetails, FileModel? profilePhoto) async {
+  Future<UserDetails> createUser(
+    UserDetails userDetails,
+    FileModel? profilePhoto,
+  ) async {
     String profilePhotoUrl = '';
 
     // If the user data contains profile photo, then first upload the photo
@@ -22,8 +24,10 @@ class UserDetailsProvider {
     // Add a new entry in user collection.
     UserDetails updatedUserDetails =
         userDetails.copyWith(profilePhotoUrl: profilePhotoUrl);
-    return _firebaseFirestore
+
+    DocumentReference<Map<String, dynamic>> userRef = await _firebaseFirestore
         .collection("users")
         .add(updatedUserDetails.toMap());
+    return updatedUserDetails.copyWith(id: userRef.id);
   }
 }

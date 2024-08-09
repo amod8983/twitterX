@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/core/utils/debouncer.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
-import 'package:twitterx/features/auth/presentation/widgets/user_details.dart';
+import 'package:twitterx/features/auth/presentation/widgets/user_details_form.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -57,7 +57,7 @@ class _SignupState extends State<Signup> {
     _formKey.currentState?.save();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => UserDetails(
+        builder: (_) => UserDetailsForm(
           email: _email,
           password: _password,
         ),

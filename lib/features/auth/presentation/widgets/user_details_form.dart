@@ -3,29 +3,34 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // dependency
 import 'package:twitterx/main.dart';
 import 'package:twitterx/core/constants/constant.dart';
+import 'package:twitterx/features/auth/data/models/file_model.dart';
+import 'package:twitterx/features/auth/data/models/user_details.dart';
 import 'package:twitterx/core/widgets/circular_loading_with_text.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
 import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
+import 'package:twitterx/features/auth/business_logic/user/user_bloc.dart';
 import 'package:twitterx/features/auth/presentation/widgets/user_image_picker.dart';
 
 final formatter = DateFormat('dd-MMMM-yyyy');
 
 enum Gender { male, female, other }
 
-class UserDetails extends StatefulWidget {
+class UserDetailsForm extends StatefulWidget {
   final String email;
   final String password;
-  const UserDetails({super.key, required this.email, required this.password});
+  const UserDetailsForm(
+      {super.key, required this.email, required this.password});
 
   @override
-  State<UserDetails> createState() => _UserDetailsState();
+  State<UserDetailsForm> createState() => _UserDetailsFormState();
 }
 
-class _UserDetailsState extends State<UserDetails> {
+class _UserDetailsFormState extends State<UserDetailsForm> {
   final _usernameController = TextEditingController();
   final _nameController = TextEditingController();
   final _dobController = TextEditingController();
@@ -76,6 +81,27 @@ class _UserDetailsState extends State<UserDetails> {
     }
   }
 
+  void _saveUserDetails(UserCredential userCred) {
+    UserDetails userDetails = UserDetails.ceate(
+      userId: userCred.user!.uid,
+      email: widget.email,
+      username: _username,
+      name: _name,
+      gender: _gender!.name,
+      dob: _dob,
+    );
+    FileModel? userPhoto;
+    if (_pickedImage != null) {
+      userPhoto = FileModel(file: _pickedImage!);
+    }
+    context.read<UserBloc>().add(
+          UserCreate(
+            userdetails: userDetails,
+            userPhoto: userPhoto,
+          ),
+        );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -92,22 +118,35 @@ class _UserDetailsState extends State<UserDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, authState) {
-        if (authState is AuthSuccess) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => const MyApp()),
-            (_) => false,
-          );
-        } else if (authState is AuthError) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(authState.error)),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(listener: (ctx, authState) {
+          if (authState is AuthSuccess) {
+            _saveUserDetails(authState.userCredential);
+          } else if (authState is AuthError) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(authState.error)),
+              );
+          }
+        }),
+        BlocListener<UserBloc, UserState>(listener: (ctx, userState) {
+          if (userState is UserLoaded) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const MyApp()),
+              (_) => false,
             );
-        }
-      },
+          } else if (userState is UserError) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(userState.error)),
+              );
+          }
+        })
+      ],
       child: Scaffold(
         appBar: kDefaultAppBar,
         body: SizedBox(
@@ -143,6 +182,7 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                     TextFormField(
                       key: _usernameKey,
+                      controller: _usernameController,
                       onChanged: (_) {},
                       maxLength: 50,
                       cursorColor: kPrimaryColor,
@@ -170,6 +210,7 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                     TextFormField(
                       key: _nameKey,
+                      controller: _nameController,
                       onChanged: (_) {},
                       cursorColor: kPrimaryColor,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
