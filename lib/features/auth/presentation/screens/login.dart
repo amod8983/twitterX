@@ -1,7 +1,14 @@
+//Flutter package
 import 'package:flutter/material.dart';
-import 'package:twitterx/core/constants/constant.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Dependency
+import 'package:twitterx/main.dart';
 import 'package:twitterx/core/utils/debouncer.dart';
+import 'package:twitterx/core/constants/constant.dart';
+import 'package:twitterx/core/widgets/circular_loading_with_text.dart';
 import 'package:twitterx/core/widgets/buttons/twitter_elevated_button.dart';
+import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -52,6 +59,13 @@ class _LoginState extends State<Login> {
     });
   }
 
+  void _requestLogin() {
+    _formKey.currentState?.save();
+    context
+        .read<AuthBloc>()
+        .add(AuthLoginRequested(email: _email, password: _password));
+  }
+
   @override
   void dispose() {
     _debouncer.dispose();
@@ -60,111 +74,138 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: kDefaultAppBar,
-      body: SizedBox(
-        height: double.infinity,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Text(
-                      'Enter your email address and password to login into your account',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color:
-                                Theme.of(context).textTheme.bodyMedium?.color,
-                          ),
-                    ),
-                    const SizedBox(
-                      height: 48,
-                    ),
-                    TextFormField(
-                      key: _emailKey,
-                      onChanged: _verifyEmail,
-                      cursorColor: kPrimaryColor,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 16,
-                          ),
-                      decoration: const InputDecoration(
-                        labelText: 'Email address',
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, authState) {
+        if (authState is AuthSuccess) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const MyApp()),
+            (_) => false,
+          );
+        } else if (authState is AuthError) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text(authState.error)),
+            );
+        }
+      },
+      child: Scaffold(
+        appBar: kDefaultAppBar,
+        body: SizedBox(
+          height: double.infinity,
+          child: Stack(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 32,
                       ),
-                      keyboardType: TextInputType.emailAddress,
-                      autocorrect: false,
-                      autofocus: true,
-                      textCapitalization: TextCapitalization.none,
-                      validator: (value) {
-                        if (value == null ||
-                            value.trim().isEmpty ||
-                            !value.contains('@')) {
-                          return 'Please enter a valid email address';
-                        }
-                        return null;
-                      },
-                      onSaved: (val) {
-                        _email = val!.trim();
-                      },
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    TextFormField(
-                      key: _passwordKey,
-                      onChanged: _verifyPassword,
-                      cursorColor: kPrimaryColor,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 16,
-                          ),
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
+                      Text(
+                        'Enter your email address and password to login into your account',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium?.color,
+                            ),
                       ),
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.trim().length < 6) {
-                          return 'Password must be atleast 8 character long';
-                        }
-                        return null;
-                      },
-                      onSaved: (val) {
-                        _password = val!.trim();
-                      },
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 48,
+                      ),
+                      TextFormField(
+                        key: _emailKey,
+                        onChanged: _verifyEmail,
+                        cursorColor: kPrimaryColor,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: 16,
+                            ),
+                        decoration: const InputDecoration(
+                          labelText: 'Email address',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        autofocus: true,
+                        textCapitalization: TextCapitalization.none,
+                        validator: (value) {
+                          if (value == null ||
+                              value.trim().isEmpty ||
+                              !value.contains('@')) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
+                        onSaved: (val) {
+                          _email = val!.trim();
+                        },
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      TextFormField(
+                        key: _passwordKey,
+                        onChanged: _verifyPassword,
+                        cursorColor: kPrimaryColor,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: 16,
+                            ),
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                        ),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.trim().length < 6) {
+                            return 'Password must be atleast 8 character long';
+                          }
+                          return null;
+                        },
+                        onSaved: (val) {
+                          _password = val!.trim();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: TwitterElevatedButton(
-                        buttonText: 'Login',
-                        disabled: !_isFormValid,
-                        onTap: () {}),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  )
-                ],
-              ),
-            )
-          ],
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          if (state is AuthProcessing) {
+                            return CircularLoadingWithText(
+                              text: state.message,
+                            );
+                          }
+                          return TwitterElevatedButton(
+                              buttonText: 'Login',
+                              disabled: !_isFormValid,
+                              onTap: _requestLogin);
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

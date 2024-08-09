@@ -16,6 +16,7 @@ import 'package:twitterx/features/auth/business_logic/user/user_bloc.dart';
 // Feature - Auth
 import 'package:twitterx/features/auth/presentation/screens/welcome.dart';
 import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
+import 'package:twitterx/features/feed/presentation/screens/feed_screen.dart';
 
 // Feature - Settings
 import 'package:twitterx/features/settings/business_logic/bloc/theme_bloc.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
                       return const SplashScreen();
                     }
                     if (snapshot.hasData) {
-                      return const Text('Welcome');
+                      return const FeedScreen();
                     } else {
                       return const Welcome();
                     }
