@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
         if (authState is AuthSuccess) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => const MyApp()),
+            MaterialPageRoute(builder: (_) => const HomePage()),
             (_) => false,
           );
         } else if (authState is AuthError) {

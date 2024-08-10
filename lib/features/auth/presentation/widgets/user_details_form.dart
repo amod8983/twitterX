@@ -135,7 +135,7 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
           if (userState is UserLoaded) {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => const MyApp()),
+              MaterialPageRoute(builder: (_) => const HomePage()),
               (_) => false,
             );
           } else if (userState is UserError) {
