@@ -33,6 +33,11 @@ final ThemeData lightTheme = ThemeData(
       borderSide: BorderSide(color: Colors.grey, width: 1.0),
     ),
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.black,
+    unselectedItemColor: Colors.black,
+  )
 );
 
 // Dark Theme
@@ -64,4 +69,9 @@ final ThemeData darkTheme = ThemeData(
       borderSide: BorderSide(color: Colors.grey, width: 1.0),
     ),
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Colors.black,
+    selectedItemColor: Colors.white,
+    unselectedItemColor: Colors.white,
+  )
 );
