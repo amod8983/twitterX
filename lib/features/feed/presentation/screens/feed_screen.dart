@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Dependencies
 import 'package:twitterx/core/constants/constant.dart';
 import 'package:twitterx/features/auth/business_logic/auth/auth_bloc.dart';
-import 'package:twitterx/features/feed/presentation/widgets/bottom_navigation.dart';
+import 'package:twitterx/features/settings/presentation/widgets/bottom_navigation.dart';
+import 'package:twitterx/features/settings/presentation/widgets/side_drawer.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -37,6 +38,7 @@ class _MyFeedScreen extends State<FeedScreen> {
         currentIndex: _currentIndex,
         onIndexChange: _onIndexChange,
       ),
+      drawer: const SideDrawer(),
     );
   }
 }

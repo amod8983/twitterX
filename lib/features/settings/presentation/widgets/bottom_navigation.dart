@@ -36,8 +36,8 @@ class BottomNavigation extends StatelessWidget {
             activeIcon: Icon(Icons.group),
             label: ''),
         BottomNavigationBarItem(
-            icon: Icon(Icons.add_alert_outlined),
-            activeIcon: Icon(Icons.add_alert),
+            icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(Icons.email_outlined),
