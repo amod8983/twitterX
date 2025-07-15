@@ -33,7 +33,7 @@ class Welcome extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             const SizedBox(
-              height: 160,
+              height: 140,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * (2 / 3),
@@ -47,7 +47,7 @@ class Welcome extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 160,
+              height: 140,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class Welcome extends StatelessWidget {
                 ),
                 const TermAndCondition(),
                 const SizedBox(
-                  height: 48,
+                  height: 28,
                 ),
                 Row(
                   children: [
